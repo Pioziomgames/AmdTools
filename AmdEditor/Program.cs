@@ -23,7 +23,8 @@ namespace AmdEditor
         }
         static void Main(string[] args)
         {
-            //args = new string[] { @"C:\Users\piotr\Downloads\amdtoolsTest\es002_extracted" };
+
+            //args = new string[] { @"C:\Users\oem\Desktop\amd test\wp0a0.amd" };
 
             string InputFile = "";
 
@@ -32,7 +33,7 @@ namespace AmdEditor
                 InputFile = args[0];
             else
             {
-                Console.WriteLine($"BedEditor v{Version.Major}.{Version.Minor}.{Version.Build}\n" +
+                Console.WriteLine($"AmdEditor v{Version.Major}.{Version.Minor}.{Version.Build}\n" +
                     $"Extracts and Repacks contents of p4g Amd Files\n" +
                     $"Usage:\n" +
                     $"       AmdEditor.exe InputFile (optional)OutputFolder\n" +

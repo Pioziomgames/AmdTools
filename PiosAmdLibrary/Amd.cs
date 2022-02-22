@@ -16,7 +16,7 @@ namespace PiosAmdLibrary
         /// </summary>
         public Amd()
         {
-            
+            Chunks = new List<AmdChunk>();
         }
 
         /// <summary>
@@ -25,28 +25,14 @@ namespace PiosAmdLibrary
         public Amd(string Path)
         {
             BinaryReader reader = new BinaryReader(File.Open(Path, FileMode.Open));
-            if (reader.ReadInt32() != 1263421507)
-            {
-                throw new Exception("Not a proper AMD File");
-            }
-            uint ChunkCount = reader.ReadUInt32();
-            Chunks = new List<AmdChunk>();
-            for (int i = 0; i < ChunkCount; i++)
-                Chunks.Add(new AmdChunk(reader));
+            ReadData(reader);
         }
         /// <summary>
         /// Reads an <see cref="Amd"/> from a <see cref="BinaryReader"/>.
         /// </summary>
         public Amd(BinaryReader reader)
         {
-            if (reader.ReadInt32() != 1263421507)
-            {
-                throw new Exception("Not a proper AMD File");
-            }
-            uint ChunkCount = reader.ReadUInt32();
-            Chunks = new List<AmdChunk>();
-            for (int i = 0; i < ChunkCount; i++)
-                Chunks.Add(new AmdChunk(reader));
+            ReadData(reader);
         }
         /// <summary>
         /// Writes an <see cref="Amd"/> to a Path.
@@ -54,16 +40,30 @@ namespace PiosAmdLibrary
         public void Save(string Path)
         {
             BinaryWriter writer = new BinaryWriter(File.Open(Path,FileMode.Create));
-            writer.Write(1263421507);
-            writer.Write(Chunks.Count);
-            foreach (AmdChunk chunk in Chunks)
-                chunk.Save(writer);
+            WriteData(writer);
         }
 
         /// <summary>
         /// Writes an <see cref="Amd"/> to a <see cref="BinaryWriter"/>.
         /// </summary>
         public void Save(BinaryWriter writer)
+        {
+            WriteData(writer);
+        }
+
+        private void ReadData(BinaryReader reader)
+        {
+            if (reader.ReadInt32() != 1263421507)
+            {
+                throw new Exception("Not a proper AMD File");
+            }
+            uint ChunkCount = reader.ReadUInt32();
+            Chunks = new List<AmdChunk>();
+            for (int i = 0; i < ChunkCount; i++)
+                Chunks.Add(new AmdChunk(reader));
+        }
+
+        private void WriteData(BinaryWriter writer)
         {
             writer.Write(1263421507);
             writer.Write(Chunks.Count);
@@ -85,15 +85,32 @@ namespace PiosAmdLibrary
         public AmdChunk()
         {
         }
+        public AmdChunk(byte[] Bytes)
+        {
+            using (BinaryReader reader = new BinaryReader(new MemoryStream(Bytes)))
+                ReadData(reader);
+        }
         public AmdChunk(string Path)
         {
             BinaryReader reader = new BinaryReader(File.Open(Path, FileMode.Open));
-            FileType = reader.ReadChars(16);
-            Flags = reader.ReadUInt32();
-            int size = reader.ReadInt32();
-            Data = reader.ReadBytes(size);
+            ReadData(reader);
         }
         public AmdChunk(BinaryReader reader)
+        {
+            ReadData(reader);
+        }
+
+        public void Save(string Path)
+        {
+            BinaryWriter writer = new BinaryWriter(File.Open(Path, FileMode.Create));
+            WriteData(writer);
+        }
+        public void Save(BinaryWriter writer)
+        {
+            WriteData(writer);
+        }
+
+        private void ReadData(BinaryReader reader)
         {
             FileType = reader.ReadChars(16);
             Flags = reader.ReadUInt32();
@@ -101,19 +118,7 @@ namespace PiosAmdLibrary
             Data = reader.ReadBytes(size);
         }
 
-        public void Save(string Path)
-        {
-            BinaryWriter writer = new BinaryWriter(File.Open(Path, FileMode.Create));
-            writer.Write(FileType);
-            if (FileType.Length < 16)
-                for (int i = 0; i < 16 - FileType.Length; i++)
-                    writer.Write((byte)0);
-            writer.Write(Flags);
-            writer.Write(Data.Length);
-            long pain = writer.BaseStream.Position; // if this long isn't created for some reason not all data gets written 
-            writer.Write(Data);
-        }
-        public void Save(BinaryWriter writer)
+        private void WriteData(BinaryWriter writer)
         {
             writer.Write(FileType);
             if (FileType.Length < 16)
@@ -121,7 +126,7 @@ namespace PiosAmdLibrary
                     writer.Write((byte)0);
             writer.Write(Flags);
             writer.Write(Data.Length);
-            long pain = writer.BaseStream.Position; // if this long isn't created for some reason not all data gets written 
+            long pain = writer.BaseStream.Position; // if this long isn't created, for some reason not all data gets written 
             writer.Write(Data);
         }
     }

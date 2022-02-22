@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmdEditor", "AmdEditor\AmdEditor.csproj", "{CE68CDE3-C141-49F2-B83C-08A8C2E3AF6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmdEditor", "AmdEditor\AmdEditor.csproj", "{CE68CDE3-C141-49F2-B83C-08A8C2E3AF6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiosAmdLibrary", "PiosAmdLibrary\PiosAmdLibrary.csproj", "{1701A012-A901-4C63-9FD0-09E9CD8516FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PiosAmdLibrary", "PiosAmdLibrary\PiosAmdLibrary.csproj", "{1701A012-A901-4C63-9FD0-09E9CD8516FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeckBenderEditor", "NeckBenderEditor\NeckBenderEditor.csproj", "{98A8C20E-18A9-48FB-B199-C214CB712385}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EffectEplEditor", "EffectEplEditor\EffectEplEditor.csproj", "{0640CEF2-07C6-4EFE-9CDC-C8E888119BFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{1701A012-A901-4C63-9FD0-09E9CD8516FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1701A012-A901-4C63-9FD0-09E9CD8516FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1701A012-A901-4C63-9FD0-09E9CD8516FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98A8C20E-18A9-48FB-B199-C214CB712385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98A8C20E-18A9-48FB-B199-C214CB712385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98A8C20E-18A9-48FB-B199-C214CB712385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98A8C20E-18A9-48FB-B199-C214CB712385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0640CEF2-07C6-4EFE-9CDC-C8E888119BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0640CEF2-07C6-4EFE-9CDC-C8E888119BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0640CEF2-07C6-4EFE-9CDC-C8E888119BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0640CEF2-07C6-4EFE-9CDC-C8E888119BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

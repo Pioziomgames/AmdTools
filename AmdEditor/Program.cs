@@ -24,7 +24,7 @@ namespace AmdEditor
         static void Main(string[] args)
         {
 
-            //args = new string[] { @"C:\Users\oem\Desktop\amd test\wp0a0.amd" };
+            
 
             string InputFile = "";
 

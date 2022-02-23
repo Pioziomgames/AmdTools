@@ -23,7 +23,7 @@ namespace AmdEditor
         }
         static void Main(string[] args)
         {
-            args = new string[] { @"C:\Users\oem\Desktop\amd test\test\NECK_BENDER_extracted" };
+            
 
             string InputFile = "";
 

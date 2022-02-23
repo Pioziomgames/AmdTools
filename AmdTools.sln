@@ -11,6 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeckBenderEditor", "NeckBen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EffectEplEditor", "EffectEplEditor\EffectEplEditor.csproj", "{0640CEF2-07C6-4EFE-9CDC-C8E888119BFC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batch", "Batch", "{2E3F2ABA-4AD4-4A61-AFA1-9E38D21681EF}"
+	ProjectSection(SolutionItems) = preProject
+		batch\MassAmdExtract.bat = batch\MassAmdExtract.bat
+		batch\MassEffectEplExtract.bat = batch\MassEffectEplExtract.bat
+		batch\MassNeckBenderExtract.bat = batch\MassNeckBenderExtract.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

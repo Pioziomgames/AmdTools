@@ -1,8 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <Nullable>enable</Nullable>
+	<ImplicitUsings>disable</ImplicitUsings>
+	<AssemblyVersion>0.7.1.0</AssemblyVersion>
+	<FileVersion>0.7.1.0</FileVersion>
   </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath>../Build/Debug</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>../Build/Release</OutputPath>
+	</PropertyGroup>
 
 </Project>

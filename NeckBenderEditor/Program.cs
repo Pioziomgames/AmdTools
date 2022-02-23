@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using PiosAmdLibrary;
 
@@ -22,7 +23,7 @@ namespace AmdEditor
         }
         static void Main(string[] args)
         {
-            args = new string[] { @"C:\Users\oem\Desktop\amd test\test\NECK_BENDER.NBEND" };
+            args = new string[] { @"C:\Users\oem\Desktop\amd test\test\NECK_BENDER_extracted" };
 
             string InputFile = "";
 
@@ -79,12 +80,27 @@ namespace AmdEditor
 
             Console.WriteLine($"Reading the contents of: {InputFile}...");
 
-
+            string[] DatFiles = Directory.GetFiles(InputFile, "*.dat", SearchOption.TopDirectoryOnly);
             string[] OgFiles = Directory.GetFiles(InputFile, "*", SearchOption.TopDirectoryOnly);
+
+            List<string> OgFilesList = OgFiles.ToList();
+            Console.WriteLine(DatFiles.ToList().Except(OgFiles.ToList()).ToList().Count);
+            foreach (string File in DatFiles) OgFilesList.Remove(File); // remove bin files from OgFiles
+
+            OgFiles = OgFilesList.ToArray();
+
 
             List<NECK_CHUNK> NeckChunks = new List<NECK_CHUNK>();
 
-            for (int i = 0; i < OgFiles.Length - 1; i++)
+            for (int i = 0; i < DatFiles.Length; i++) // add bin files
+            {
+                NECK_CHUNK Chunk = new NECK_CHUNK();
+                Chunk.Data = File.ReadAllBytes(DatFiles[i]);
+                Chunk.Name = Path.GetFileName(DatFiles[i]).ToCharArray();
+                NeckChunks.Add(Chunk);
+            }
+
+            for (int i = 0; i < OgFiles.Length; i++) // add all other files
             {
                 NECK_CHUNK Chunk = new NECK_CHUNK();
                 Chunk.Data = File.ReadAllBytes(OgFiles[i]);
@@ -92,9 +108,10 @@ namespace AmdEditor
                 NeckChunks.Add(Chunk);
             }
 
-            NECK_BENDER NewAmd = new NECK_BENDER();
-            NewAmd.Chunks = NeckChunks;
-            NewAmd.Save(path);
+            NECK_BENDER NewNeck = new NECK_BENDER();
+            NewNeck.Chunks = NeckChunks;
+            Console.WriteLine(NeckChunks.Count);
+            NewNeck.Save(path);
             Console.WriteLine($"\nNECK_BENDER File Saved to: {path}");
         }
     }

@@ -48,6 +48,7 @@ namespace PiosAmdLibrary
 
         private void WriteData(BinaryWriter writer)
         {
+            Console.WriteLine($"WriteData Count: {Chunks.Count}");
             writer.Write(Chunks.Count);
             foreach (NECK_CHUNK chunk in Chunks)
                 chunk.Save(writer);

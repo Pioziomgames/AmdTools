@@ -41,6 +41,8 @@ namespace PiosAmdLibrary
         {
             BinaryWriter writer = new BinaryWriter(File.Open(Path,FileMode.Create));
             WriteData(writer);
+            writer.Flush();
+            writer.Close();
         }
 
         /// <summary>
@@ -104,6 +106,8 @@ namespace PiosAmdLibrary
         {
             BinaryWriter writer = new BinaryWriter(File.Open(Path, FileMode.Create));
             WriteData(writer);
+            writer.Flush();
+            writer.Close();
         }
         public void Save(BinaryWriter writer)
         {

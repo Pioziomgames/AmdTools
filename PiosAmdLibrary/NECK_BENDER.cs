@@ -30,7 +30,11 @@ namespace PiosAmdLibrary
         public void Save(string Path)
         {
             using (BinaryWriter writer = new BinaryWriter(File.OpenWrite(Path)))
+            {
                 WriteData(writer);
+                writer.Flush();
+                writer.Close();
+            }
         }
         public void Save(BinaryWriter writer)
         {
@@ -48,7 +52,6 @@ namespace PiosAmdLibrary
 
         private void WriteData(BinaryWriter writer)
         {
-            Console.WriteLine($"WriteData Count: {Chunks.Count}");
             writer.Write(Chunks.Count);
             foreach (NECK_CHUNK chunk in Chunks)
                 chunk.Save(writer);

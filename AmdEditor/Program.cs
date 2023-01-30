@@ -23,9 +23,6 @@ namespace AmdEditor
         }
         static void Main(string[] args)
         {
-
-            
-
             string InputFile = "";
 
 
@@ -110,7 +107,11 @@ namespace AmdEditor
                 JsonFromFile = reader.ReadToEnd();
 
             List<uint> Flags = JsonConvert.DeserializeObject<List<uint>>(JsonFromFile);
-
+            if (Flags ==null)
+            {
+                Console.WriteLine("Flags.Json reading failed");
+                Exit();
+            }
             
             string[] OgFiles = Directory.GetFiles(InputFile, "*", SearchOption.TopDirectoryOnly);
 
@@ -126,7 +127,8 @@ namespace AmdEditor
             {
                 AmdChunk Chunk = new AmdChunk();
                 Chunk.Data = File.ReadAllBytes(OgFiles[i]);
-                Chunk.FileType = OgFiles[i].Substring(OgFiles[i].IndexOf('.') + 1).ToUpper().ToCharArray();
+                string f = Path.GetFileName(OgFiles[i]);
+                Chunk.FileType = f.Substring(f.IndexOf('.') + 1).ToUpper().ToCharArray();
                 Chunk.Flags = Flags[i];
                 AmdChunks.Add(Chunk);
             }

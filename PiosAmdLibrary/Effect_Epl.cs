@@ -55,7 +55,8 @@ namespace PiosAmdLibrary
             using (BinaryWriter writer = new BinaryWriter(System.IO.File.Open(path, FileMode.Create)))
             {
                 WriteData(writer);
-
+                writer.Flush();
+                writer.Close();
             }
 
         }
